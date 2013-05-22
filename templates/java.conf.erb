@@ -1,0 +1,10 @@
+LOG_DIR=<%= @logdir %>
+INIT_LOG=<%= @service %>.log
+CP=.<%- @cp.each do |c| %>:<%= c %><% end %>
+USER=<%= @user %>
+GROUP=<%= @group %>
+PID=/var/run/<%= @service %>.pid
+XMS=<%= @XMS %>
+XMX=<%= @XMX %>
+XSS=<%= @XSS %>
+MAIN_CLASS=<%= @main_class %>

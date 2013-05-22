@@ -1,0 +1,36 @@
+# Java service upstart script
+# 2013 - rterhaar@atlanticdynamic.com for Adcade
+#
+description "start and stop the generic java service"
+version "1.0"
+author "Rob Terhaar"
+author "Yangming Huang"
+
+description "<%= @service %> vertx server"
+#umask 0007
+respawn limit 15 5
+oom never
+
+start on (local-filesystems
+    and net-device-up IFACE!=lo)
+stop on shutdown
+
+respawn
+
+pre-start script
+  . /etc/<%= @service %>.conf
+  rm -rf $LOG_DIR
+  mkdir -p -m0755 $LOG_DIR
+  chown $USER:$GROUP $LOG_DIR
+end script
+
+script
+  . /etc/<%= @service %>.conf
+  OPTS="-Djava.ext.dirs=lib"
+  chdir $APP_DIR
+  JAVA_OPTS="-Xms${XMS} -Xmx${XMX} -Xss${XSS} $OPTS"
+  exec su -s /bin/sh -c "/usr/bin/java -cp ${CP} ${MAIN_CLASS}" $USER > ${LOG_DIR}/<%= @service %>.stdio 2>&1
+end script
+
+post-stop script
+end script
