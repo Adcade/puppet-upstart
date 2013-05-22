@@ -1,4 +1,4 @@
-define javaservice(
+define upstart::java (
   $service   = $title,
   $main_class,
   $classpath = [],
