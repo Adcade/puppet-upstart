@@ -9,8 +9,8 @@ script
     export HOME="/root"
 
     echo $$ > /var/run/adoworker.pid
-    exec cd /opt/adcade/deploy/node && npm install && cd 
-    exec sudo -u root /usr/local/bin/node /opt/adcade/deploy/node/adworkerRunner.js >> /var/log/adoworker.sys.log 2>&1
+    exec cd /opt/adcade/ && npm install && cd 
+    exec sudo -u root /usr/local/bin/node /opt/adcade/adworkerRunner.js >> /var/log/adoworker.sys.log 2>&1
 end script
 
 pre-start script
