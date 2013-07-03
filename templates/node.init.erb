@@ -10,7 +10,7 @@ script
 
     echo $$ > /var/run/adworker.pid
     exec cd /opt/adcade/ && npm install && cd 
-    exec sudo -u root /usr/local/bin/node /opt/adcade/newadwoker/adworkerRunner.js >> /var/log/adworker.sys.log 2>&1
+    exec sudo -u root /usr/bin/node /opt/adcade/newadwoker/adworkerRunner.js >> /var/log/adworker.sys.log 2>&1
 end script
 
 pre-start script
