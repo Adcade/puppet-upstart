@@ -7,15 +7,7 @@ stop on shutdown
 
 script
     chdir /opt/adcade/simad/
-    exec sudo /usr/bin/python controller.py 1 >> /var/log/simulator.log 
-    exec sudo /usr/bin/python controller.py 1 >> /var/log/simulator.log
-    exec sudo /usr/bin/python controller.py 1 >> /var/log/simulator.log
-    exec sudo /usr/bin/python controller.py 1 >> /var/log/simulator.log
-    exec sudo /usr/bin/python controller.py 1 >> /var/log/simulator.log
-    exec sudo /usr/bin/python controller.py 1 >> /var/log/simulator.log
-    exec sudo /usr/bin/python controller.py 1 >> /var/log/simulator.log
-    exec sudo /usr/bin/python controller.py 1 >> /var/log/simulator.log
-    exec sudo /usr/bin/python controller.py 1 >> /var/log/simulator.log
+    exec sudo /usr/bin/python controller.py simple.conf >> /var/log/simulator.log 
 end script
 
 pre-start script
