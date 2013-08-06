@@ -20,17 +20,16 @@ define upstart::java (
   file { "/etc/${service}.conf":
     ensure  => file,
     content => template("${module_name}/java.conf.erb"),
-    before  => Service[$service],
   }
 
   file { "/etc/init/${service}.conf":
     ensure  => file,
     content => template("${module_name}/java.init.erb"),
-    before  => Service[$service],
   }
 
   service { $service:
     ensure  => running,
     enable  => true,
+    subscribe => File["/etc/${service}.conf", "/etc/init/${service}.conf"],
   }
 }

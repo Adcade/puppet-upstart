@@ -4,37 +4,35 @@ Exec {
 exec {'apt-get update': } -> Package<||>
 
 include java7
-# include vertx
+include vertx
 
-file { '/tmp/Server.java':
-  ensure => file,
-  source => "puppet:///modules/upstart/Server.java",
-} ->
+$testdir = '/opt/test'
 
-upstart::java { "vserver":
-  main_class => "Server.java",
-  classpath  => ["/tmp"],
+file { $testdir:
+  ensure  => directory,
+  recurse => true;
 }
 
-file { '/tmp/Worker.java':
-  ensure => file,
-  source => "puppet:///modules/upstart/Worker.java",
+file { "${testdir}/adserver.jar":
+  ensure  => file,
+  source  => "puppet:///modules/upstart/adserver.jar",
+  require => File[$testdir];
 } ->
 
-upstart::java { "vworker":
-  main_class => "Worker.java",
-  classpath  => "/tmp",
+upstart::java { "adworker":
+  main_class => "com.adcade.SessionEventWorker",
+  classpath  => ["${testdir}/adserver.jar"],
 }
 
 include nodejs
 
-file { '/tmp/app.js':
+file { "${testdir}/app.js":
   ensure => file,
   source => "puppet:///modules/upstart/app.js",
 } ->
 
 upstart::node { 'nodeapp':
-  appdir    => "/tmp",
+  appdir    => $testdir,
   mainappjs => "app.js",
   require   => Class['nodejs'];
 }
