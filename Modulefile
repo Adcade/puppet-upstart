@@ -1,0 +1,8 @@
+name         'adcade-upstart'
+version      '0.1.0'
+summary      'Manage upstart service for java, nodejs and python'
+description  'Manage upstart service for java, nodejs and python'
+author       'Yangming Huang'
+license      'MIT'
+project_page 'https://github.com/Adcade/puppet-upstart'
+dependency   'puppetlabs/stdlib'

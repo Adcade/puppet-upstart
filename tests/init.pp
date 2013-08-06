@@ -4,11 +4,11 @@ Exec {
 exec {'apt-get update': } -> Package<||>
 
 include java7
-include vertx
+# include vertx
 
 file { '/tmp/Server.java':
   ensure => file,
-  source => "puppet:///modules/javaservice/Server.java",
+  source => "puppet:///modules/upstart/Server.java",
 } ->
 
 upstart::java { "vserver":
@@ -18,7 +18,7 @@ upstart::java { "vserver":
 
 file { '/tmp/Worker.java':
   ensure => file,
-  source => "puppet:///modules/javaservice/Worker.java",
+  source => "puppet:///modules/upstart/Worker.java",
 } ->
 
 upstart::java { "vworker":
@@ -26,3 +26,15 @@ upstart::java { "vworker":
   classpath  => "/tmp",
 }
 
+include nodejs
+
+file { '/tmp/app.js':
+  ensure => file,
+  source => "puppet:///modules/upstart/app.js",
+} ->
+
+upstart::node { 'nodeapp':
+  appdir    => "/tmp",
+  mainappjs => "app.js",
+  require   => Class['nodejs'];
+}

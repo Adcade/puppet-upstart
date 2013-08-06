@@ -8,14 +8,14 @@ author "Yangming Huang"
 
 description "<%= @service %> vertx server"
 #umask 0007
+
+respawn
 respawn limit 15 5
 oom never
 
 start on (local-filesystems
     and net-device-up IFACE!=lo)
 stop on shutdown
-
-respawn
 
 pre-start script
   . /etc/<%= @service %>.conf
