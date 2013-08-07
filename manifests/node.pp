@@ -1,10 +1,11 @@
 define upstart::node (
-  $service = $title,
+  $service   = $title,
   $appdir,
   $main_js,
-  $user    = "root",
-  $group   = "root",
-  $logdir  = "/tmp",
+  $main_args = "",
+  $user      = "root",
+  $group     = "root",
+  $logdir    = "/tmp",
 ) {
   include stdlib
 

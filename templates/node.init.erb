@@ -24,7 +24,7 @@ script
     export HOME="/root"
     echo $$ > /var/run/<%= @service %>.pid
     chdir <%= @appdir %>
-    exec su -s /bin/sh -c "/usr/bin/node <%= @mainappjs %>" <%= @user %> >> <%= @logdir %>/<%= @service %>.stdio 2>&1
+    exec su -s /bin/sh -c "/usr/bin/node <%= @mainappjs %> <%= @main_args %>" <%= @user %> >> <%= @logdir %>/<%= @service %>.stdio 2>&1
 end script
 
 pre-stop script
