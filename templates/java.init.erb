@@ -19,9 +19,9 @@ stop on shutdown
 
 pre-start script
   . /etc/<%= @service %>.conf
-  rm -rf $LOG_DIR
-  mkdir -p -m0755 $LOG_DIR
-  chown $USER:$GROUP $LOG_DIR
+  rm -f ${LOG_DIR}/${INIT_LOG}
+  touch ${LOG_DIR}/${INIT_LOG}
+  chown $USER:$GROUP ${LOG_DIR}/${INIT_LOG}
 end script
 
 script
@@ -29,7 +29,7 @@ script
   OPTS="-Djava.ext.dirs=lib"
   chdir $APP_DIR
   JAVA_OPTS="-Xms${XMS} -Xmx${XMX} -Xss${XSS} $OPTS"
-  exec su -s /bin/sh -c "/usr/bin/java -cp ${CP} ${MAIN_CLASS}" $USER > ${LOG_DIR}/<%= @service %>.stdio 2>&1
+  exec su -s /bin/sh -c "/usr/bin/java -cp ${CP} ${MAIN_CLASS}" $USER > ${LOG_DIR}/${INIT_LOG} 2>&1
 end script
 
 post-stop script

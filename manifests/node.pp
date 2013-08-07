@@ -1,7 +1,7 @@
 define upstart::node (
   $service = $title,
   $appdir,
-  $mainappjs,
+  $main_js,
   $user    = "root",
   $group   = "root",
   $logdir  = "/tmp",

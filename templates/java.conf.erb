@@ -1,5 +1,5 @@
 LOG_DIR=<%= @logdir %>
-INIT_LOG=<%= @service %>.log
+INIT_LOG=<%= @service %>.stdio
 CP=.<%- @cp.each do |c| %>:<%= c %><% end %>
 USER=<%= @user %>
 GROUP=<%= @group %>
