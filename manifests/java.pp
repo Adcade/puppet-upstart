@@ -4,7 +4,7 @@ define upstart::java (
   $classpath = [],
   $user      = "root",
   $group     = "root",
-  $logdir    = "/tmp",
+  $logfile   = "/tmp/${title}.stdio",
   $XMS       = '256M',
   $XMX       = '1G',
   $XSS       = '2048K',
